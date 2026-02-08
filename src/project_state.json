@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 15,
+  "projectStateVersion": 37,
   "summary": "Redesign the portfolio homepage for Riya Tyagi while keeping the existing layout/structure (hero text left, photo right) but updating the visual theme to a modern, colorful, professional style using an off-white/light beige background, deep navy text, and limited gradient accents (hero shapes, CTA buttons, highlight/stats cards).",
   "architectural_notes": [
     "Website should be responsive (desktop/tablet/mobile) and optimized for performance (compressed/optimized images, fast load).",
@@ -11,13 +11,22 @@
     "Ensure the downloadable resume asset is a valid, non-corrupted PDF and is served correctly so the downloaded file opens in standard PDF viewers.",
     "Homepage redesign: keep current layout/sections/spacing (hero text-left, profile image-right) but update theme to soft off-white/light beige background with deep navy/dark blue headings/body text.",
     "Use one vibrant gradient accent style (either Purple→Pink→Orange or Blue→Cyan→Teal) and restrict gradients to hero background shapes, CTA buttons, and highlight/stat cards only; keep overall look professional and recruiter-friendly.",
-    "Homepage UI styling preference: minimal modern UI with smooth gradients, soft shadows, rounded cards; colorful but not childish."
+    "Homepage UI styling preference: minimal modern UI with smooth gradients, soft shadows, rounded cards; colorful but not childish.",
+    "Contact form: enable backend storage of submissions (name, email, message, timestamp) so messages are not lost even without email notifications."
   ],
   "known_issues": [
     "Hero/profile image is being replaced with a non-real/incorrect picture instead of the user-provided photo; must display the provided photo as-is.",
-    "Downloaded Resume file errors on open (likely corrupted/incorrect PDF asset or serving issue); replace with the user-provided working PDF and verify download opens correctly."
+    "Downloaded Resume file errors on open (likely corrupted/incorrect PDF asset or serving issue); replace with the user-provided working PDF and verify download opens correctly.",
+    "Contact form does not send email notifications; implement backend storage as the supported alternative (and clarify no email alerts).",
+    "No Internet Identity login button is currently visible in the navigation, preventing admin authentication and causing 'Unauthorized access' on /messages.",
+    "Contact form/message submission is again failing with error \"failed to save messages\" (regression persists after Version 10 deployment).",
+    "Admin secret token is not configured, so /messages shows 'Unauthorized access'/'Get admin access' even after successful Internet Identity login.",
+    "/messages page shows \"Failed to load messages. Please try again later.\" even after Internet Identity login + admin token; indicates backend `getAllMessages()`/message listing call is failing.",
+    "/messages page stuck in infinite admin-access loop: user is logged in with Internet Identity but UI keeps requesting ?caffeineAdminToken=YOUR_TOKEN; expected auto-insert admin token link/button is missing.",
+    "Possible caching/version mismatch: latest /messages page code not being served/rendered, causing admin access wiring changes to not take effect.",
+    "/messages still shows 'Admin Access Issue / Unauthorized Access' even when logged in with Internet Identity and admin token shows configured; re-provisioning does not resolve, indicating backend admin provisioning/binding to principal is incomplete or broken."
   ],
-  "isFixRequest": false,
+  "isFixRequest": true,
   "existing_features": [
     {
       "id": "feature-implement-a-responsive-single-page-portfolio-website-for-riya-tyagi-with-top-navigation-and-sections-home-hero-about-me-skills-experience-projects-certifications-contact-ensure-smooth-in-page-scrolling-to-sections-and-a-clear-information-hierarchy-semantic-headings",
@@ -242,6 +251,182 @@
         "REQ-29"
       ],
       "version": 1
+    },
+    {
+      "id": "feature-update-the-contact-form-submission-ux-copy-to-accurately-reflect-behavior-the-message-is-submitted-saved-and-no-email-notification-is-sent",
+      "title": "Update the Contact form submission UX copy to accurately reflect behavior: the message is submitted/saved, and no email notification is sent.",
+      "reqIds": [
+        "REQ-32"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-new-frontend-page-screen-at-the-path-messages-that-lists-saved-contact-form-submissions-retrieved-from-the-backend",
+      "title": "Create a new frontend page/screen at the path \"/messages\" that lists saved contact form submissions retrieved from the backend.",
+      "reqIds": [
+        "REQ-33"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-react-query-data-hook-to-retrieve-saved-messages-from-the-backend-actor-and-use-it-in-the-messages-page",
+      "title": "Implement a React Query data hook to retrieve saved messages from the backend actor and use it in the Messages page.",
+      "reqIds": [
+        "REQ-34"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enforce-admin-only-access-ux-on-the-messages-page-by-gracefully-handling-unauthorized-access-errors-from-getallmessages-and-providing-user-facing-guidance",
+      "title": "Enforce admin-only access UX on the Messages page by gracefully handling unauthorized access errors from `getAllMessages()` and providing user-facing guidance.",
+      "reqIds": [
+        "REQ-35"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-way-to-access-the-new-messages-page-from-the-ui-without-disrupting-existing-single-page-section-navigation",
+      "title": "Add a way to access the new Messages page from the UI without disrupting existing single-page section navigation.",
+      "reqIds": [
+        "REQ-36"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-internet-identity-authentication-control-to-the-top-navigation-bar-portfolionavbar-that-is-visible-site-wide-on-both-the-homepage-and-the-messages-page-showing-a-login-button-when-the-user-is-not-authenticated-and-a-logout-button-when-the-user-is-authenticated",
+      "title": "Add an Internet Identity authentication control to the top navigation bar (PortfolioNavbar) that is visible site-wide on both the homepage and the /messages page, showing a \"Login\" button when the user is not authenticated and a \"Logout\" button when the user is authenticated.",
+      "reqIds": [
+        "REQ-37"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-prevent-authenticated-but-non-admin-users-from-being-unable-to-submit-contact-messages-due-to-actor-initialization-failing-when-the-admin-secret-token-is-missing-empty-only-initialize-access-control-when-a-valid-caffeineadmintoken-secret-is-present-and-do-not-block-creating-an-actor-for-normal-public-operations-e-g-submitmessage",
+      "title": "Prevent authenticated-but-non-admin users from being unable to submit contact messages due to actor initialization failing when the admin secret token is missing/empty; only initialize access control when a valid `caffeineAdminToken` secret is present, and do not block creating an actor for normal public operations (e.g., `submitMessage`).",
+      "reqIds": [
+        "REQ-40"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-improve-the-contact-form-failure-ux-to-surface-a-clearer-actionable-error-message-while-keeping-all-user-facing-text-in-english-e-g-distinguish-temporary-network-backend-errors-from-validation-errors",
+      "title": "Improve the Contact form failure UX to surface a clearer actionable error message while keeping all user-facing text in English (e.g., distinguish temporary network/backend errors from validation errors).",
+      "reqIds": [
+        "REQ-41"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-generate-a-new-admin-secret-token-value-for-caffeineadmintoken-and-apply-configure-it-for-this-deployed-app-so-that-the-site-owner-can-obtain-admin-permission-after-logging-in-with-internet-identity-and-access-the-messages-page-without-seeing-the-unauthorized-access-get-admin-access-state",
+      "title": "Generate a new admin secret token value for `caffeineAdminToken` and apply/configure it for this deployed app so that the site owner can obtain admin permission after logging in with Internet Identity and access the `/messages` page without seeing the 'Unauthorized Access / get admin access' state.",
+      "reqIds": [
+        "REQ-42"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-frontend-actor-initialization-so-it-only-attempts-to-initialize-admin-access-control-when-a-non-empty-caffeineadmintoken-secret-is-present-from-getsecretparameter-caffeineadmintoken-and-does-not-call-initializeaccesscontrolwithsecret-with-an-empty-string",
+      "title": "Update frontend actor initialization so it only attempts to initialize admin access control when a non-empty `caffeineAdminToken` secret is present (from `getSecretParameter('caffeineAdminToken')`), and does not call `_initializeAccessControlWithSecret` with an empty string.",
+      "reqIds": [
+        "REQ-43"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-frontend-messages-page-error-handling-so-that-when-message-loading-fails-non-unauthorized-the-ui-provides-a-clearer-actionable-english-error-state-while-preserving-the-existing-unauthorized-access-ux-flow",
+      "title": "Update the frontend Messages page error handling so that when message loading fails (non-unauthorized), the UI provides a clearer, actionable English error state while preserving the existing Unauthorized Access UX flow.",
+      "reqIds": [
+        "REQ-45"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-fix-the-admin-token-detection-and-guidance-on-the-messages-page-so-it-matches-the-actual-secret-handling-implementation-hash-session-based-and-stop-instructing-users-to-manually-add-a-querystring-token-caffeineadmintoken-your-token-when-the-app-actually-reads-from-the-url-hash-and-sessionstorage",
+      "title": "Fix the admin-token detection and guidance on the Messages page so it matches the actual secret-handling implementation (hash/session-based), and stop instructing users to manually add a querystring token (\"?caffeineAdminToken=YOUR_TOKEN\") when the app actually reads from the URL hash and sessionStorage.",
+      "reqIds": [
+        "REQ-46"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-ui-driven-admin-provisioning-flow-on-messages-that-auto-injects-the-configured-admin-token-into-sessionstorage-and-triggers-provisioning-authorizeadmin-access-control-initialization-without-requiring-manual-url-editing",
+      "title": "Add a UI-driven admin provisioning flow on /messages that auto-injects the configured admin token into sessionStorage and triggers provisioning (authorizeAdmin + access-control initialization) without requiring manual URL editing.",
+      "reqIds": [
+        "REQ-47"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-prevent-caching-version-mismatches-from-causing-older-messages-ui-bundles-to-render-after-a-redeploy-by-adding-a-cache-busting-strategy-and-a-visible-build-version-marker-on-the-messages-page-so-the-deployed-version-can-be-verified",
+      "title": "Prevent caching/version mismatches from causing older /messages UI bundles to render after a redeploy by adding a cache-busting strategy and a visible build/version marker on the /messages page so the deployed version can be verified.",
+      "reqIds": [
+        "REQ-49"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-messages-page-unauthorized-state-so-it-never-loops-indefinitely-if-the-ui-indicates-logged-in-and-admin-token-configured-but-the-backend-still-returns-unauthorized-show-a-clear-actionable-remediation-state-e-g-a-single-re-provision-admin-access-action-rather-than-repeating-the-same-instructions",
+      "title": "Update the Messages page Unauthorized state so it never loops indefinitely: if the UI indicates \"Logged in\" and \"Admin token configured\" but the backend still returns Unauthorized, show a clear actionable remediation state (e.g., a single \"Re-provision admin access\" action) rather than repeating the same instructions.",
+      "reqIds": [
+        "REQ-50"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-messages-frontend-flow-so-that-once-the-backend-has-bound-the-logged-in-principal-as-admin-the-page-loads-messages-normally-for-that-identity-without-requiring-the-presence-of-caffeineadmintoken-in-the-url-hash-or-sessionstorage-and-without-any-manual-provisioning-steps",
+      "title": "Update the /messages frontend flow so that once the backend has bound the logged-in principal as admin, the page loads messages normally for that identity without requiring the presence of `caffeineAdminToken` in the URL hash or sessionStorage, and without any manual provisioning steps.",
+      "reqIds": [
+        "REQ-54"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-improve-messages-remediation-ui-for-the-specific-failure-case-described-logged-in-admin-token-configured-still-unauthorized-by-offering-an-explicit-clear-stale-admin-provisioning-and-retry-action-that-clears-any-local-token-session-provisioning-state-and-re-attempts-provisioning-using-the-configured-token-if-available-without-requiring-url-editing",
+      "title": "Improve /messages remediation UI for the specific failure case described (logged in + admin token configured + still unauthorized) by offering an explicit 'clear stale admin provisioning and retry' action that clears any local token/session provisioning state and re-attempts provisioning using the configured token (if available), without requiring URL editing.",
+      "reqIds": [
+        "REQ-55"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-redeploy-with-cache-invalidation-verification-for-messages-by-ensuring-the-existing-no-cache-headers-remain-in-place-and-that-a-visible-build-version-marker-on-messages-updates-after-deployment-so-the-deployed-version-can-be-verified-during-troubleshooting",
+      "title": "Redeploy with cache invalidation verification for /messages by ensuring the existing no-cache headers remain in place and that a visible build/version marker on /messages updates after deployment so the deployed version can be verified during troubleshooting.",
+      "reqIds": [
+        "REQ-56"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-messages-admin-provisioning-flow-so-it-stops-looping-in-the-admin-access-issue-state-once-the-backend-has-successfully-bound-the-logged-in-principal-as-admin-if-checkadminstatus-is-true-the-page-must-fetch-and-render-messages-normally-and-must-not-require-caffeineadmintoken-to-be-present-in-the-url-hash-or-sessionstorage",
+      "title": "Update the /messages admin-provisioning flow so it stops looping in the “Admin Access Issue” state once the backend has successfully bound the logged-in principal as admin: if `checkAdminStatus()` is `true`, the page must fetch and render messages normally and must not require `caffeineAdminToken` to be present in the URL hash or sessionStorage.",
+      "reqIds": [
+        "REQ-59"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-harden-frontend-actor-provisioning-behavior-so-public-operations-e-g-contact-form-submission-are-not-blocked-for-authenticated-non-admin-users-when-the-admin-token-is-missing-empty-while-still-allowing-admin-provisioning-to-occur-when-a-non-empty-token-is-available",
+      "title": "Harden frontend actor/provisioning behavior so public operations (e.g., contact form submission) are not blocked for authenticated non-admin users when the admin token is missing/empty, while still allowing admin provisioning to occur when a non-empty token is available.",
+      "reqIds": [
+        "REQ-60"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-static-resume-pdf-at-the-exact-public-path-assets-resume-riya-tyagi-resume-pdf-with-the-newly-user-attached-resume-file-so-that-the-downloaded-opened-file-is-a-valid-readable-pdf-not-corrupted-across-common-pdf-viewers-browser-pdf-viewer-and-desktop-pdf-readers",
+      "title": "Replace the existing static resume PDF at the exact public path \"/assets/resume/riya-tyagi-resume.pdf\" with the newly user-attached resume file so that the downloaded/opened file is a valid, readable PDF (not corrupted) across common PDF viewers (browser PDF viewer and desktop PDF readers).",
+      "reqIds": [
+        "REQ-61"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-static-resume-pdf-at-the-exact-public-path-assets-resume-riya-tyagi-resume-pdf-file-frontend-public-assets-resume-riya-tyagi-resume-pdf-with-the-newly-user-attached-pdf-so-the-downloaded-opened-resume-is-a-valid-readable-pdf-not-corrupted",
+      "title": "Replace the existing static resume PDF at the exact public path \"/assets/resume/riya-tyagi-resume.pdf\" (file: \"frontend/public/assets/resume/riya-tyagi-resume.pdf\") with the newly user-attached PDF so the downloaded/opened resume is a valid, readable PDF (not corrupted).",
+      "reqIds": [
+        "REQ-63"
+      ],
+      "version": 1
     }
   ],
   "new_feature_requests": [
@@ -329,6 +514,132 @@
       "id": "AR-22",
       "summary": "Redesign homepage visual theme to modern, colorful style while keeping existing layout/structure; use off-white/light beige background, deep navy text, and limited gradient accents (hero shapes, CTA buttons, highlight/stat cards) with rounded cards, soft shadows; update hero content (name/title/tagline/CTAs)",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-23",
+      "summary": "Fix backend contact message storage so that submitted Contact form messages are actually persisted and not lost due to immutable/non-stable data structures.",
+      "reqIds": [
+        "REQ-30"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-24",
+      "summary": "Add an owner-only backend method to list stored contact form submissions so the site owner can review saved messages (no email notifications).",
+      "reqIds": [
+        "REQ-31"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-25",
+      "summary": "Add an admin-only frontend page/dashboard to view saved contact form messages (name, email, message, timestamp), sorted newest-first, using the existing owner-only backend listing method",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-26",
+      "summary": "Add Internet Identity Login/Logout button to the top navigation bar (visible site-wide) so the admin can authenticate and access the /messages page",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-27",
+      "summary": "Fix backend contact message persistence so `submitMessage(name, email, message)` reliably stores messages across canister upgrades and does not rely on non-stable in-memory data structures.",
+      "reqIds": [
+        "REQ-38"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-28",
+      "summary": "Fix `getAllMessages()` implementation so it deterministically returns messages sorted newest-first without relying on invalid/unsupported collection conversion or sorting calls that can trap at runtime.",
+      "reqIds": [
+        "REQ-39"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-29",
+      "summary": "Generate and apply the required admin secret token (caffeineAdminToken) in project/canister settings so authenticated Internet Identity users can access the admin-only /messages page without seeing 'Unauthorized access'/'Get admin access'",
+      "reqIds": [],
+      "status": "in_progress"
+    },
+    {
+      "id": "AR-30",
+      "summary": "Fix the Motoko backend `getAllMessages()` implementation in `backend/main.mo` so it never traps during normal execution and always returns a deterministic `[ContactMessage]` sorted newest-first by `timestamp`.",
+      "reqIds": [
+        "REQ-44"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-31",
+      "summary": "Fix /messages infinite admin-access loop by properly wiring admin access: generate/configure caffeineAdminToken, provide UI auto-insert/auto-inject token link/button (no manual URL editing), ensure latest /messages bundle is served (no caching/version mismatch), redeploy with admin mode active, and document exact UI placement/text for the admin access control.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-34",
+      "summary": "Ensure the backend admin access mechanism is actually enabled and deterministic: admin token is configured, admin authorization persists for the session, and getAllMessages does not trap during normal execution when the caller is authorized.",
+      "reqIds": [
+        "REQ-48"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-35",
+      "summary": "Fix backend admin provisioning so the logged-in Internet Identity principal is correctly bound to an admin role, persists on the backend, and /messages loads for that identity without URL tokens/manual steps; clear stale provisioning state and redeploy with cache invalidation",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-36",
+      "summary": "Fix backend admin provisioning so that the logged-in Internet Identity principal can be correctly bound to the admin role and subsequently recognized as admin without requiring URL/session tokens on future visits to /messages.",
+      "reqIds": [
+        "REQ-51"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-37",
+      "summary": "Persist admin authorization on the backend across canister upgrades by storing the admin principal (and any required authorization state) in stable storage and restoring it on initialization/upgrade so admin access does not silently break after redeploys.",
+      "reqIds": [
+        "REQ-52"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-38",
+      "summary": "Clear any stale or partial admin provisioning state on the backend so that if the current access-control state is inconsistent (e.g., token accepted but admin role not effective), the system can reset/rebuild the authorization state from the persisted admin principal binding.",
+      "reqIds": [
+        "REQ-53"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-39",
+      "summary": "Fix backend admin binding so that when a logged-in caller successfully provisions admin access (via the configured `caffeineAdminToken`), the backend persistently stores that caller principal as the admin in stable state and restores it on subsequent canister restarts/upgrades.",
+      "reqIds": [
+        "REQ-57"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-40",
+      "summary": "Fix backend message storage and retrieval to be upgrade-safe and non-trapping: persist contact messages and message IDs in stable state across upgrades, and ensure `getAllMessages()` deterministically returns a `[ContactMessage]` sorted newest-first by `timestamp` without relying on unsupported/trapping collection conversions or sort calls.",
+      "reqIds": [
+        "REQ-58"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-42",
+      "summary": "Keep the existing Hero resume download behavior robust across browsers: the \"Download Resume\" CTA must continue to open the resume in a new tab and allow direct download, using the same resume path \"/assets/resume/riya-tyagi-resume.pdf\" as currently referenced in frontend/src/sections/HeroSection.tsx.",
+      "reqIds": [
+        "REQ-62"
+      ],
       "status": "pending"
     }
   ],

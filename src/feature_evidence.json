@@ -2,105 +2,19 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-global-visual-theme-to-use-a-soft-off-white-light-beige-background-and-deep-navy-dark-blue-for-headings-and-primary-text-while-keeping-the-existing-page-layout-sections-and-spacing-unchanged",
-      "featureTitle": "Update the global visual theme to use a soft off-white / light beige background and deep navy/dark blue for headings and primary text while keeping the existing page layout, sections, and spacing unchanged.",
-      "files": [
-        "frontend/src/App.tsx",
-        "frontend/src/index.css",
-        "frontend/tailwind.config.js"
-      ],
+      "featureId": "feature-replace-the-existing-static-resume-pdf-at-the-exact-public-path-assets-resume-riya-tyagi-resume-pdf-file-frontend-public-assets-resume-riya-tyagi-resume-pdf-with-the-newly-user-attached-pdf-so-the-downloaded-opened-resume-is-a-valid-readable-pdf-not-corrupted",
+      "featureTitle": "Replace the existing static resume PDF at the exact public path \"/assets/resume/riya-tyagi-resume.pdf\" (file: \"frontend/public/assets/resume/riya-tyagi-resume.pdf\") with the newly user-attached PDF so the downloaded/opened resume is a valid, readable PDF (not corrupted).",
+      "files": [],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
         "build-template-react@1.0.0",
         "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-25"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-implement-a-single-vibrant-gradient-accent-style-using-option-2-blue-cyan-teal-and-apply-gradients-only-to-1-hero-background-shapes-2-cta-buttons-and-3-highlight-stat-cards-remove-avoid-gradient-usage-elsewhere",
-      "featureTitle": "Implement a single vibrant gradient accent style using Option 2 (Blue → Cyan → Teal) and apply gradients only to: (1) hero background shapes, (2) CTA buttons, and (3) highlight/stat cards; remove/avoid gradient usage elsewhere.",
-      "files": [
-        "frontend/src/components/PortfolioNavbar.tsx",
-        "frontend/src/components/SectionLayout.tsx",
-        "frontend/src/index.css",
-        "frontend/src/sections/ContactSection.tsx",
-        "frontend/src/sections/ExperienceSection.tsx",
-        "frontend/src/sections/HeroSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-26"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-update-the-hero-section-content-to-include-name-riya-tyagi-title-data-analytics-data-science-professional-and-add-the-short-tagline-turning-data-into-actionable-insights-prominently-in-the-hero-text-block-while-preserving-the-existing-hero-layout-text-left-image-right-and-cta-button-labels-view-portfolio-download-resume-contact-me",
-      "featureTitle": "Update the Hero section content to include: Name \"Riya Tyagi\"; Title \"Data Analytics & Data Science Professional\"; and add the short tagline \"Turning data into actionable insights\" prominently in the hero text block, while preserving the existing hero layout (text left, image right) and CTA button labels (View Portfolio, Download Resume, Contact Me).",
-      "files": [
-        "frontend/src/components/PortfolioNavbar.tsx",
-        "frontend/src/sections/HeroSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-27"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-refresh-component-styling-across-the-homepage-to-feel-minimal-modern-and-recruiter-friendly-smooth-gradients-only-where-allowed-soft-shadows-and-rounded-cards-ensure-the-look-is-colorful-but-not-childish-and-remains-professional-elegant",
-      "featureTitle": "Refresh component styling across the homepage to feel minimal, modern, and recruiter-friendly: smooth gradients (only where allowed), soft shadows, and rounded cards; ensure the look is colorful but not childish and remains professional/elegant.",
-      "files": [
-        "frontend/src/index.css",
-        "frontend/src/sections/AboutSection.tsx",
-        "frontend/src/sections/CertificationsSection.tsx",
-        "frontend/src/sections/ProjectsSection.tsx",
-        "frontend/src/sections/SkillsSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-28"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-keep-existing-navigation-behavior-smooth-scrolling-and-section-structure-intact-while-updating-any-navbar-styling-needed-to-match-the-new-beige-navy-gradient-accent-theme",
-      "featureTitle": "Keep existing navigation behavior, smooth scrolling, and section structure intact while updating any navbar styling needed to match the new beige + navy + gradient-accent theme.",
-      "files": [
-        "frontend/src/components/PortfolioNavbar.tsx",
-        "frontend/src/index.css"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-29"
+        "REQ-63"
       ],
       "confidence": "high"
     }

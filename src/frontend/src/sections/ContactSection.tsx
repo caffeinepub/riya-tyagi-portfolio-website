@@ -45,7 +45,7 @@ export function ContactSection() {
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const { submitMessage, isSubmitting } = useContactSubmit();
+  const { submitMessage, isSubmitting, isReady } = useContactSubmit();
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -75,17 +75,40 @@ export function ContactSection() {
       return;
     }
 
+    // Check if actor is ready before attempting submission
+    if (!isReady) {
+      toast.error('Please wait', {
+        description: 'The form is still loading. Please try again in a moment.',
+      });
+      return;
+    }
+
     try {
       await submitMessage(formData.name, formData.email, formData.message);
-      toast.success('Message sent successfully!', {
-        description: "Thank you for reaching out. I'll get back to you soon.",
+      toast.success('Message received!', {
+        description: "Your message has been saved. I'll review it and get back to you soon.",
       });
       setFormData({ name: '', email: '', message: '' });
       setErrors({});
-    } catch (error) {
-      toast.error('Failed to send message', {
-        description: 'Please try again or contact me directly via email.',
-      });
+    } catch (error: any) {
+      // Display user-friendly error messages based on error type
+      if (error?.message === 'ACTOR_NOT_READY') {
+        toast.error('Please wait', {
+          description: 'The form is still loading. Please try again in a moment.',
+        });
+      } else if (error?.message === 'NETWORK_ERROR') {
+        toast.error('Connection issue', {
+          description: 'Please check your internet connection and try again, or contact me directly at riyatyagi2017@gmail.com.',
+        });
+      } else if (error?.message === 'UNAUTHORIZED') {
+        toast.error('Access denied', {
+          description: 'Please contact me directly at riyatyagi2017@gmail.com.',
+        });
+      } else {
+        toast.error('Failed to save message', {
+          description: 'Something went wrong. Please try again or contact me directly at riyatyagi2017@gmail.com.',
+        });
+      }
     }
   };
 
@@ -195,10 +218,12 @@ export function ContactSection() {
                   type="submit"
                   className="w-full gradient-accent text-white hover:opacity-90"
                   size="lg"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !isReady}
                 >
                   {isSubmitting ? (
                     'Sending...'
+                  ) : !isReady ? (
+                    'Loading...'
                   ) : (
                     <>
                       <Send className="mr-2 h-4 w-4" />
@@ -206,6 +231,11 @@ export function ContactSection() {
                     </>
                   )}
                 </Button>
+                {!isReady && !isSubmitting && (
+                  <p className="text-xs text-muted-foreground text-center">
+                    Initializing form...
+                  </p>
+                )}
               </form>
             </CardContent>
           </Card>

@@ -1,95 +1,24 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-08T18:13:50.863Z",
+  "generatedAt": "2026-02-08T21:13:38.706Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 5,
-    "implemented": 5,
+    "total": 1,
+    "implemented": 1,
     "items": [
       {
-        "id": "REQ-25",
-        "summary": "Update the global visual theme to use a soft off-white / light beige background and deep navy/dark blue for headings and primary text while keeping the existing page layout, sections, and spacing unchanged.",
+        "id": "REQ-63",
+        "summary": "Replace the existing static resume PDF at the exact public path \"/assets/resume/riya-tyagi-resume.pdf\" (file: \"frontend/public/assets/resume/riya-tyagi-resume.pdf\") with the newly user-attached PDF so the downloaded/opened resume is a valid, readable PDF (not corrupted).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/index.css",
-          "frontend/tailwind.config.js",
-          "frontend/src/App.tsx"
+          "frontend/public/assets/resume/riya-tyagi-resume.pdf"
         ],
         "matchedFiles": [
-          "frontend/src/index.css",
-          "frontend/tailwind.config.js",
-          "frontend/src/App.tsx"
-        ]
-      },
-      {
-        "id": "REQ-26",
-        "summary": "Implement a single vibrant gradient accent style using Option 2 (Blue → Cyan → Teal) and apply gradients only to: (1) hero background shapes, (2) CTA buttons, and (3) highlight/stat cards; remove/avoid gradient usage elsewhere.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/index.css",
-          "frontend/src/components/SectionLayout.tsx",
-          "frontend/src/sections/ExperienceSection.tsx",
-          "frontend/src/sections/HeroSection.tsx",
-          "frontend/src/components/PortfolioNavbar.tsx",
-          "frontend/src/sections/ContactSection.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/index.css",
-          "frontend/src/components/SectionLayout.tsx",
-          "frontend/src/sections/ExperienceSection.tsx",
-          "frontend/src/sections/HeroSection.tsx",
-          "frontend/src/components/PortfolioNavbar.tsx",
-          "frontend/src/sections/ContactSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-27",
-        "summary": "Update the Hero section content to include: Name \"Riya Tyagi\"; Title \"Data Analytics & Data Science Professional\"; and add the short tagline \"Turning data into actionable insights\" prominently in the hero text block, while preserving the existing hero layout (text left, image right) and CTA button labels (View Portfolio, Download Resume, Contact Me).",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/sections/HeroSection.tsx",
-          "frontend/src/components/PortfolioNavbar.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/sections/HeroSection.tsx",
-          "frontend/src/components/PortfolioNavbar.tsx"
-        ]
-      },
-      {
-        "id": "REQ-28",
-        "summary": "Refresh component styling across the homepage to feel minimal, modern, and recruiter-friendly: smooth gradients (only where allowed), soft shadows, and rounded cards; ensure the look is colorful but not childish and remains professional/elegant.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/index.css",
-          "frontend/src/sections/ProjectsSection.tsx",
-          "frontend/src/sections/SkillsSection.tsx",
-          "frontend/src/sections/AboutSection.tsx",
-          "frontend/src/sections/CertificationsSection.tsx",
-          "frontend/src/components/Footer.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/src/index.css",
-          "frontend/src/sections/ProjectsSection.tsx",
-          "frontend/src/sections/SkillsSection.tsx",
-          "frontend/src/sections/AboutSection.tsx",
-          "frontend/src/sections/CertificationsSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-29",
-        "summary": "Keep existing navigation behavior, smooth scrolling, and section structure intact while updating any navbar styling needed to match the new beige + navy + gradient-accent theme.",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/src/components/PortfolioNavbar.tsx",
-          "frontend/src/index.css"
-        ],
-        "matchedFiles": [
-          "frontend/src/components/PortfolioNavbar.tsx",
-          "frontend/src/index.css"
+          "frontend/public/assets/resume/riya-tyagi-resume.pdf"
         ]
       }
     ]
@@ -97,20 +26,9 @@
   "changedFiles": [
     "build-request.json",
     "feature_evidence.json",
-    "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/src/App.tsx",
-    "frontend/src/components/PortfolioNavbar.tsx",
-    "frontend/src/components/SectionLayout.tsx",
-    "frontend/src/index.css",
-    "frontend/src/sections/AboutSection.tsx",
-    "frontend/src/sections/CertificationsSection.tsx",
-    "frontend/src/sections/ContactSection.tsx",
-    "frontend/src/sections/ExperienceSection.tsx",
-    "frontend/src/sections/HeroSection.tsx",
-    "frontend/src/sections/ProjectsSection.tsx",
-    "frontend/src/sections/SkillsSection.tsx",
-    "frontend/tailwind.config.js",
+    "frontend/public/assets/resume/riya-tyagi-resume.pdf",
+    "frontend/src/utils/urlParams.ts",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

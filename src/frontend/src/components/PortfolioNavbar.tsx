@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Mail, LogIn, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useInternetIdentity } from '../hooks/useInternetIdentity';
+import { useQueryClient } from '@tanstack/react-query';
 
 const navLinks = [
   { id: 'home', label: 'Home' },
@@ -11,43 +13,107 @@ const navLinks = [
   { id: 'certifications', label: 'Certifications' },
 ];
 
-export function PortfolioNavbar() {
+interface PortfolioNavbarProps {
+  navigate?: (path: string) => void;
+  currentPath?: string;
+}
+
+export function PortfolioNavbar({ navigate, currentPath = '/' }: PortfolioNavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
+  
+  const { login, clear, loginStatus, identity } = useInternetIdentity();
+  const queryClient = useQueryClient();
+
+  const isMessagesPage = currentPath === '/messages';
+  const isAuthenticated = !!identity;
+  const isLoggingIn = loginStatus === 'logging-in';
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
 
-      // Update active section based on scroll position
-      const sections = [...navLinks, { id: 'contact', label: 'Contact' }].map(link => document.getElementById(link.id));
-      const scrollPosition = window.scrollY + 100;
+      if (!isMessagesPage) {
+        // Update active section based on scroll position
+        const sections = [...navLinks, { id: 'contact', label: 'Contact' }].map(link => document.getElementById(link.id));
+        const scrollPosition = window.scrollY + 100;
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPosition) {
-          setActiveSection([...navLinks, { id: 'contact', label: 'Contact' }][i].id);
-          break;
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const section = sections[i];
+          if (section && section.offsetTop <= scrollPosition) {
+            setActiveSection([...navLinks, { id: 'contact', label: 'Contact' }][i].id);
+            break;
+          }
         }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMessagesPage]);
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const offset = 80;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - offset;
+    if (navigate && currentPath !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(id);
+      if (element) {
+        const offset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    }
+    setIsOpen(false);
+  };
+
+  const handleNavigateToMessages = () => {
+    if (navigate) {
+      navigate('/messages');
+    }
+    setIsOpen(false);
+  };
+
+  const handleNavigateHome = () => {
+    if (navigate) {
+      navigate('/');
+    } else {
+      scrollToSection('home');
+    }
+  };
+
+  const handleAuth = async () => {
+    if (isAuthenticated) {
+      await clear();
+      queryClient.clear();
+    } else {
+      try {
+        await login();
+      } catch (error: any) {
+        console.error('Login error:', error);
+        if (error.message === 'User is already authenticated') {
+          await clear();
+          setTimeout(() => login(), 300);
+        }
+      }
     }
     setIsOpen(false);
   };
@@ -61,7 +127,7 @@ export function PortfolioNavbar() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           <button
-            onClick={() => scrollToSection('home')}
+            onClick={handleNavigateHome}
             className="text-xl md:text-2xl font-bold text-primary hover:text-primary/80 transition-colors"
           >
             Riya Tyagi
@@ -69,7 +135,7 @@ export function PortfolioNavbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
+            {!isMessagesPage && navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
@@ -83,13 +149,56 @@ export function PortfolioNavbar() {
               </button>
             ))}
             
-            {/* Primary Contact CTA with gradient */}
+            {isMessagesPage ? (
+              <Button
+                onClick={handleNavigateHome}
+                variant="ghost"
+                className="text-muted-foreground hover:text-foreground"
+              >
+                Back to Portfolio
+              </Button>
+            ) : (
+              <>
+                <Button
+                  onClick={() => scrollToSection('contact')}
+                  className="ml-4 shadow-soft-lg hover:shadow-xl transition-shadow gradient-accent text-white hover:opacity-90"
+                  size="default"
+                >
+                  Contact Me
+                </Button>
+                <Button
+                  onClick={handleNavigateToMessages}
+                  variant="outline"
+                  size="default"
+                  className="ml-2"
+                >
+                  <Mail className="mr-2 h-4 w-4" />
+                  Messages
+                </Button>
+              </>
+            )}
+            
+            {/* Desktop Auth Button */}
             <Button
-              onClick={() => scrollToSection('contact')}
-              className="ml-4 shadow-soft-lg hover:shadow-xl transition-shadow gradient-accent text-white hover:opacity-90"
+              onClick={handleAuth}
+              disabled={isLoggingIn}
+              variant={isAuthenticated ? "outline" : "default"}
               size="default"
+              className={`ml-2 ${!isAuthenticated ? 'bg-secondary hover:bg-secondary/90' : ''}`}
             >
-              Contact Me
+              {isLoggingIn ? (
+                'Logging in...'
+              ) : isAuthenticated ? (
+                <>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Logout
+                </>
+              ) : (
+                <>
+                  <LogIn className="mr-2 h-4 w-4" />
+                  Login
+                </>
+              )}
             </Button>
           </div>
 
@@ -109,7 +218,7 @@ export function PortfolioNavbar() {
         {isOpen && (
           <div className="md:hidden py-4 border-t">
             <div className="flex flex-col space-y-2">
-              {navLinks.map((link) => (
+              {!isMessagesPage && navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
@@ -122,12 +231,56 @@ export function PortfolioNavbar() {
                   {link.label}
                 </button>
               ))}
+              {isMessagesPage ? (
+                <Button
+                  onClick={handleNavigateHome}
+                  variant="outline"
+                  className="mt-2"
+                >
+                  Back to Portfolio
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    onClick={() => scrollToSection('contact')}
+                    className="mt-2 gradient-accent text-white hover:opacity-90"
+                    size="default"
+                  >
+                    Contact Me
+                  </Button>
+                  <Button
+                    onClick={handleNavigateToMessages}
+                    variant="outline"
+                    size="default"
+                    className="mt-2"
+                  >
+                    <Mail className="mr-2 h-4 w-4" />
+                    Messages
+                  </Button>
+                </>
+              )}
+              
+              {/* Mobile Auth Button */}
               <Button
-                onClick={() => scrollToSection('contact')}
-                className="mt-2 gradient-accent text-white hover:opacity-90"
+                onClick={handleAuth}
+                disabled={isLoggingIn}
+                variant={isAuthenticated ? "outline" : "default"}
                 size="default"
+                className={`mt-2 ${!isAuthenticated ? 'bg-secondary hover:bg-secondary/90' : ''}`}
               >
-                Contact Me
+                {isLoggingIn ? (
+                  'Logging in...'
+                ) : isAuthenticated ? (
+                  <>
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Logout
+                  </>
+                ) : (
+                  <>
+                    <LogIn className="mr-2 h-4 w-4" />
+                    Login
+                  </>
+                )}
               </Button>
             </div>
           </div>

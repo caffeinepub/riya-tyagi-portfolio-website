@@ -1,155 +1,21 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Portfolio homepage theme refresh (beige + navy with blue→cyan→teal gradient accents)",
+  "title": "Replace corrupted resume PDF with the newly attached valid PDF at the same public URL",
   "requirements": [
     {
-      "id": "REQ-25",
-      "summary": "Shift global theme colors to light beige/off-white background with deep navy/dark blue text while preserving existing layout/spacing.",
+      "id": "REQ-63",
+      "summary": "Replace the existing public resume PDF file with the newly attached PDF while keeping the exact same URL used by the Hero section.",
       "acceptanceCriteria": [
-        "The site background renders as a light beige/off-white tone (not pure white).",
-        "Primary text and headings render in a deep navy/dark blue tone with readable contrast on the beige background.",
-        "No changes to section order, spacing scale, or overall layout structure (including hero text-left / photo-right)."
+        "The file at \"frontend/public/assets/resume/riya-tyagi-resume.pdf\" is replaced with the newly attached PDF (byte-for-byte updated in the build output).",
+        "Clicking the \"Download Resume\" button in the Hero section downloads/opens \"/assets/resume/riya-tyagi-resume.pdf\" without any 'invalid PDF' error in common browser PDF viewers.",
+        "Opening the downloaded PDF in a desktop PDF reader (e.g., Adobe Reader/Preview) succeeds without corruption warnings."
       ],
       "file_operations": [
         {
-          "path": "frontend/src/index.css",
+          "path": "frontend/public/assets/resume/riya-tyagi-resume.pdf",
           "operation": "modify",
-          "description": "Adjust global CSS color tokens (e.g., background/foreground/primary/muted/border) to achieve a light beige/off-white backdrop and deep navy text, keeping all spacing/layout utilities intact."
-        },
-        {
-          "path": "frontend/tailwind.config.js",
-          "operation": "modify",
-          "description": "Ensure Tailwind theme continues to map to the updated CSS variables cleanly (no layout/spacing changes), keeping typography readable against the new beige background."
-        },
-        {
-          "path": "frontend/src/App.tsx",
-          "operation": "modify",
-          "description": "Update only background-related classes if needed so the global app background reflects the new beige theme without changing structure/section order/spacing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-26",
-      "summary": "Define a single consistent Blue→Cyan→Teal gradient accent and constrain gradient usage to hero decorative shapes, CTA buttons, and highlight/stat cards only.",
-      "acceptanceCriteria": [
-        "A consistent Blue→Cyan→Teal gradient style is used across the homepage wherever gradients appear.",
-        "Gradients are visible on hero background shapes and do not appear as general page/section backgrounds outside the hero decorative elements.",
-        "CTA buttons use the gradient accent (at least the primary CTA), with hover/focus states that remain professional and accessible.",
-        "Highlight/stat presentation elements (e.g., the hero floating stat card and/or metric emphasis) use the gradient accent; regular content cards elsewhere do not gain gradient fills by default."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Add/adjust a single reusable Blue→Cyan→Teal gradient utility (and hover/focus variants) and remove/replace existing non-allowed gradient usages (e.g., section-wide gradient backgrounds/separators and card-hover gradient borders) with non-gradient alternatives so gradients remain limited to hero shapes, CTA buttons, and highlight/stat cards."
-        },
-        {
-          "path": "frontend/src/components/SectionLayout.tsx",
-          "operation": "modify",
-          "description": "Remove or replace section-level decorative gradient utilities (e.g., any gradient-based subtle background or separator) so non-hero sections no longer introduce gradient backgrounds; preserve section padding/structure/spacing exactly."
-        },
-        {
-          "path": "frontend/src/sections/ExperienceSection.tsx",
-          "operation": "modify",
-          "description": "Replace the timeline gradient stroke/fill styling with a solid (non-gradient) theme-consistent style while preserving the existing timeline layout and spacing."
-        },
-        {
-          "path": "frontend/src/sections/HeroSection.tsx",
-          "operation": "modify",
-          "description": "Apply the Blue→Cyan→Teal gradient accent ONLY to hero decorative background shapes and the hero highlight/stat card presentation; keep the rest of the hero background non-gradient aside from these decorative elements. Use existing shadcn/ui components (Button, Card, Badge) via className overrides only (do not edit files under frontend/src/components/ui). Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/PortfolioNavbar.tsx",
-          "operation": "modify",
-          "description": "Apply the gradient accent ONLY to the primary CTA button styling (e.g., navbar Contact Me) with accessible hover/focus states. Use the existing shadcn/ui Button via className overrides only. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/sections/ContactSection.tsx",
-          "operation": "modify",
-          "description": "Apply the gradient accent to the contact form primary submit CTA button (and its hover/focus states) while keeping all other contact cards/links non-gradient. Use existing shadcn/ui Button/Card/Input components via className overrides only. Verify the component's usage instructions before implementing."
-        }
-      ]
-    },
-    {
-      "id": "REQ-27",
-      "summary": "Update Hero content to show the specified name/title and add the specified tagline while preserving hero layout and CTA labels.",
-      "acceptanceCriteria": [
-        "Hero displays the exact name \"Riya Tyagi\" and the exact title \"Data Analytics & Data Science Professional\".",
-        "Hero displays the exact tagline \"Turning data into actionable insights\" as a distinct line of text (not only implied in other sections).",
-        "CTA button texts remain exactly: \"View Portfolio\", \"Download Resume\", \"Contact Me\"."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/sections/HeroSection.tsx",
-          "operation": "modify",
-          "description": "Insert the exact tagline \"Turning data into actionable insights\" as a prominent, distinct line in the hero text block while preserving the existing text-left/image-right layout and keeping CTA button labels unchanged. Use existing shadcn/ui components (Button, Badge, Card) as-is via props/className only. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/PortfolioNavbar.tsx",
-          "operation": "modify",
-          "description": "Ensure the navbar brand/name remains \"Riya Tyagi\" and continues to scroll to the home section with existing behavior unchanged."
-        }
-      ]
-    },
-    {
-      "id": "REQ-28",
-      "summary": "Refresh homepage component styling to a minimal, modern, recruiter-friendly look with rounded cards, soft shadows, and polished hover/focus states (no excessive gradients).",
-      "acceptanceCriteria": [
-        "Cards and interactive elements use rounded corners and soft, consistent shadows (no harsh/neon effects).",
-        "Hover/focus states feel polished and consistent with the new theme (including buttons and prominent cards).",
-        "Overall aesthetic reads as professional and recruiter-friendly (no overly saturated backgrounds, excessive gradients, or playful styling)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "Tune shared utility classes (e.g., premium-card hover, shadows, borders, focus-visible ring behavior) to be softer and more consistent with a professional beige+navy theme, ensuring no gradients are introduced beyond the allowed gradient-accent utilities."
-        },
-        {
-          "path": "frontend/src/sections/ProjectsSection.tsx",
-          "operation": "modify",
-          "description": "Adjust card and badge className usage to align with the refreshed modern styling (rounded corners, soft shadows, refined hover) without adding gradients to regular content cards. Use existing shadcn/ui Card/Badge components via className overrides only. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/sections/SkillsSection.tsx",
-          "operation": "modify",
-          "description": "Refine card and badge styling for a cleaner modern look (consistent rounding/shadows/hover), ensuring no gradient fills are applied to regular content cards. Use existing shadcn/ui Card/Badge components via className overrides only. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/sections/AboutSection.tsx",
-          "operation": "modify",
-          "description": "Update card/icon container styling (shadows, borders, muted backgrounds) to match the new theme and modern aesthetic; keep content and layout unchanged. Use existing shadcn/ui Card components via className overrides only. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/sections/CertificationsSection.tsx",
-          "operation": "modify",
-          "description": "Align the certification highlight card styling with the updated modern theme (soft shadow, rounded edges) while keeping structure/content unchanged and avoiding gradients. Use existing shadcn/ui Card components via className overrides only. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/components/Footer.tsx",
-          "operation": "modify",
-          "description": "Update footer background/border/text/link styling to match the beige+navy theme and modern tone (no gradients), preserving layout and content."
-        }
-      ]
-    },
-    {
-      "id": "REQ-29",
-      "summary": "Preserve existing navbar behavior (active section highlighting, smooth scrolling, responsiveness) while updating styling to match the new theme.",
-      "acceptanceCriteria": [
-        "Navbar still highlights the active section and maintains smooth scrolling to sections.",
-        "Navbar remains readable against the new background and matches the updated theme without breaking responsiveness (desktop and mobile)."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/PortfolioNavbar.tsx",
-          "operation": "modify",
-          "description": "Update navbar colors (background blur state, active/hover styles, borders) to match beige+navy theme while keeping active-section tracking, smooth scrolling logic, and responsive mobile menu behavior unchanged. Use the existing shadcn/ui Button via className overrides only. Verify the component's usage instructions before implementing."
-        },
-        {
-          "path": "frontend/src/index.css",
-          "operation": "modify",
-          "description": "If needed, adjust global focus-visible ring and muted/foreground tokens so navbar text, active states, and overlays remain readable and accessible on the new beige background."
+          "description": "Overwrite/replace this static asset with the newly user-attached PDF (use the provided attachment file as the source) while keeping the exact filename and location so the public URL remains \"/assets/resume/riya-tyagi-resume.pdf\"."
         }
       ]
     }
