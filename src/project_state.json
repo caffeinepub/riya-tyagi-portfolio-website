@@ -1,0 +1,339 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 15,
+  "summary": "Redesign the portfolio homepage for Riya Tyagi while keeping the existing layout/structure (hero text left, photo right) but updating the visual theme to a modern, colorful, professional style using an off-white/light beige background, deep navy text, and limited gradient accents (hero shapes, CTA buttons, highlight/stats cards).",
+  "architectural_notes": [
+    "Website should be responsive (desktop/tablet/mobile) and optimized for performance (compressed/optimized images, fast load).",
+    "Use SEO-friendly semantic structure (headings/sections/metadata) appropriate for a personal portfolio.",
+    "Replace current hero/profile headshot with the user-attached image; crop to a centered head-and-shoulders portrait and optimize for fast loading.",
+    "Use the user-provided photo as the hero/profile image (no generated/placeholder/non-real headshot). Keep the photo as-is (no stylized replacement).",
+    "Use the user-attached template as the primary visual/layout reference to enhance the site’s design (reduce simplicity; add richer sections, styling, and interactions consistent with the template while keeping a clean professional portfolio).",
+    "Ensure the downloadable resume asset is a valid, non-corrupted PDF and is served correctly so the downloaded file opens in standard PDF viewers.",
+    "Homepage redesign: keep current layout/sections/spacing (hero text-left, profile image-right) but update theme to soft off-white/light beige background with deep navy/dark blue headings/body text.",
+    "Use one vibrant gradient accent style (either Purple→Pink→Orange or Blue→Cyan→Teal) and restrict gradients to hero background shapes, CTA buttons, and highlight/stat cards only; keep overall look professional and recruiter-friendly.",
+    "Homepage UI styling preference: minimal modern UI with smooth gradients, soft shadows, rounded cards; colorful but not childish."
+  ],
+  "known_issues": [
+    "Hero/profile image is being replaced with a non-real/incorrect picture instead of the user-provided photo; must display the provided photo as-is.",
+    "Downloaded Resume file errors on open (likely corrupted/incorrect PDF asset or serving issue); replace with the user-provided working PDF and verify download opens correctly."
+  ],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-a-responsive-single-page-portfolio-website-for-riya-tyagi-with-top-navigation-and-sections-home-hero-about-me-skills-experience-projects-certifications-contact-ensure-smooth-in-page-scrolling-to-sections-and-a-clear-information-hierarchy-semantic-headings",
+      "title": "Implement a responsive single-page portfolio website for Riya Tyagi with top navigation and sections: Home/Hero, About Me, Skills, Experience, Projects, Certifications, Contact. Ensure smooth in-page scrolling to sections and a clear information hierarchy (semantic headings).",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-home-hero-section-with-full-name-riya-tyagi-professional-title-data-analytics-data-science-professional-the-provided-short-intro-paragraph-a-professional-profile-picture-in-the-hero-cta-buttons-view-portfolio-download-resume-contact-me-a-brief-professional-summary-key-highlights-3-years-experience-95-forecast-accuracy-sql-python-expertise-animated-metrics-experience-years-tools-used-projects-completed-and-subtle-data-inspired-visuals-charts-grids-lines-that-remain-minimal-and-professional",
+      "title": "Build the Home/Hero section with: full name (Riya Tyagi), professional title (Data Analytics & Data Science Professional), the provided short intro paragraph, a professional profile picture in the hero, CTA buttons (View Portfolio, Download Resume, Contact Me), a brief professional summary, key highlights (3+ years experience, 95% forecast accuracy, SQL & Python expertise), animated metrics (experience years, tools used, projects completed), and subtle data-inspired visuals (charts/grids/lines) that remain minimal and professional.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-the-about-me-section-including-expanded-professional-summary-emphasizing-analytics-forecasting-bi-experience-with-large-datasets-collaboration-with-cross-functional-teams-education-entries-m-sc-in-data-science-amity-university-rajasthan-gpa-9-58-b-sc-mathematics-hons-university-of-delhi-gpa-8-22-and-a-short-paragraph-about-career-transition-toward-advanced-data-science-analytics-roles",
+      "title": "Create the About Me section including: expanded professional summary emphasizing analytics/forecasting/BI, experience with large datasets, collaboration with cross-functional teams, education entries (M.Sc. in Data Science, Amity University, Rajasthan, GPA 9.58; B.Sc. Mathematics (Hons.), University of Delhi, GPA 8.22), and a short paragraph about career transition toward advanced data science/analytics roles.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-the-skills-section-using-categorized-cards-and-or-minimal-icons-with-the-exact-categories-and-skills-provided-programming-databases-data-analytics-modeling-visualization-bi-tools-practices-present-skills-in-a-clean-scannable-layout-with-consistent-styling",
+      "title": "Create the Skills section using categorized cards (and/or minimal icons) with the exact categories and skills provided: Programming & Databases; Data Analytics & Modeling; Visualization & BI; Tools & Practices. Present skills in a clean, scannable layout with consistent styling.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-experience-section-with-a-timeline-based-layout-and-include-both-roles-with-the-provided-company-names-dates-and-bullet-points-1-senior-associate-forecasting-analytics-sutherland-global-services-jan-2023-present-2-data-science-intern-corizo-jul-2022-aug-2022",
+      "title": "Create an Experience section with a timeline-based layout and include both roles with the provided company names, dates, and bullet points: (1) Senior Associate – Forecasting & Analytics, Sutherland Global Services | Jan 2023 – Present; (2) Data Science Intern, Corizo | Jul 2022 – Aug 2022.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-a-projects-section-with-project-cards-hover-effects-and-tech-stack-tags-for-1-fmcg-sales-marketing-analytics-tools-sql-python-with-the-described-bullet-points-2-customer-product-analytics-tools-python-sql-with-the-described-bullet-points",
+      "title": "Create a Projects section with project cards, hover effects, and tech stack tags for: (1) FMCG Sales & Marketing Analytics (Tools: SQL, Python) with the described bullet points; (2) Customer & Product Analytics (Tools: Python, SQL) with the described bullet points.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-certifications-section-listing-data-science-with-generative-ai-pw-skills-2025",
+      "title": "Add a Certifications section listing: “Data Science with Generative AI – PW Skills (2025)”.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-a-contact-section-that-includes-the-provided-contact-details-email-phone-linkedin-github-and-a-simple-contact-form-with-fields-name-email-message-and-a-submit-action-with-clear-validation-feedback",
+      "title": "Build a Contact section that includes the provided contact details (email, phone, LinkedIn, GitHub) and a simple contact form with fields Name, Email, Message and a submit action with clear validation feedback.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-the-requested-visual-style-across-the-entire-site-modern-minimal-professional-primary-dark-blue-charcoal-with-teal-soft-cyan-accents-white-light-gray-backgrounds-clean-sans-serif-typography-inter-poppins-or-montserrat-use-subtle-animations-and-data-inspired-icons-visual-motifs-in-a-restrained-way",
+      "title": "Apply the requested visual style across the entire site: modern, minimal, professional; primary dark blue/charcoal with teal/soft cyan accents; white/light gray backgrounds; clean sans-serif typography (Inter, Poppins, or Montserrat). Use subtle animations and data-inspired icons/visual motifs in a restrained way.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-seo-friendly-structure-and-performance-best-practices-set-appropriate-page-title-meta-description-use-semantic-html-sections-headings-ensure-accessible-contrast-and-focus-states-optimize-images-compressed-correct-sizing-and-avoid-unnecessary-heavy-assets-so-the-site-loads-fast",
+      "title": "Implement SEO-friendly structure and performance best practices: set appropriate page title/meta description, use semantic HTML sections/headings, ensure accessible contrast and focus states, optimize images (compressed, correct sizing), and avoid unnecessary heavy assets so the site loads fast.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-static-assets-for-a-a-downloadable-resume-file-used-by-the-download-resume-cta-and-b-generated-imagery-profile-picture-and-optional-subtle-hero-background-visuals-ensure-assets-are-served-from-the-frontend-as-static-files-not-via-backend",
+      "title": "Add static assets for (a) a downloadable resume file used by the “Download Resume” CTA and (b) generated imagery (profile picture and optional subtle hero background visuals). Ensure assets are served from the frontend as static files (not via backend).",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-hero-section-profile-image-with-the-user-uploaded-image-photo-jpg-by-adding-an-optimized-cropped-portrait-asset-to-the-frontend-static-assets-and-updating-the-herosection-image-source-to-use-it",
+      "title": "Replace the current Hero section profile image with the user-uploaded image (Photo.jpg) by adding an optimized, cropped portrait asset to the frontend static assets and updating the HeroSection image source to use it.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-hero-section-profile-image-with-the-newly-user-attached-photo-ensuring-the-existing-picture-of-a-woman-is-removed-and-the-new-photo-is-displayed-instead",
+      "title": "Replace the current Hero section profile image with the newly user-attached photo, ensuring the existing picture of a woman is removed and the new photo is displayed instead.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-the-user-uploaded-image-file-photo-1-jpg-to-the-frontend-static-assets-and-render-it-as-the-hero-section-profile-image-exactly-as-provided-no-ai-generated-replacement-image",
+      "title": "Add the user-uploaded image file \"Photo-1.jpg\" to the frontend static assets and render it as the Hero section profile image exactly as provided (no AI-generated replacement image).",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-or-stop-referencing-the-previously-used-generated-profile-image-asset-path-assets-generated-riya-profile-user-dim-800x1000-png-so-it-cannot-appear-in-the-hero-section",
+      "title": "Remove or stop referencing the previously used generated profile image asset path \"/assets/generated/riya-profile-user.dim_800x1000.png\" so it cannot appear in the Hero section.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-enhance-the-overall-portfolio-visual-design-to-feel-less-simple-by-using-the-attached-template-image-image-png-as-a-layout-visual-richness-reference-e-g-stronger-hero-hierarchy-layered-backgrounds-floating-highlight-cards-richer-spacing-and-more-premium-interactions-while-keeping-all-existing-portfolio-content-sections-and-maintaining-a-professional-data-analytics-aesthetic",
+      "title": "Enhance the overall portfolio visual design to feel less “simple” by using the attached template image (image.png) as a layout/visual richness reference (e.g., stronger hero hierarchy, layered backgrounds, floating highlight cards, richer spacing, and more premium interactions) while keeping all existing portfolio content/sections and maintaining a professional data-analytics aesthetic.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-revamp-the-hero-section-layout-to-more-closely-resemble-the-template-s-premium-composition-left-aligned-headline-block-with-clearer-typographic-hierarchy-right-side-photo-with-layered-angled-gradient-backdrop-elements-and-at-least-one-floating-highlight-stat-card-overlay-near-the-photo-implemented-with-existing-metrics-highlights-content",
+      "title": "Revamp the Hero section layout to more closely resemble the template’s premium composition: left-aligned headline block with clearer typographic hierarchy; right-side photo with layered/angled/gradient backdrop elements; and at least one floating “highlight”/“stat” card overlay near the photo (implemented with existing metrics/highlights content).",
+      "reqIds": [
+        "REQ-18"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-upgrade-the-top-navigation-to-feel-closer-to-the-template-add-a-distinct-right-aligned-primary-action-button-for-contact-me-on-desktop-in-addition-to-the-existing-nav-links-and-refine-navbar-spacing-typography-so-it-looks-more-premium-while-retaining-current-smooth-scroll-behavior-and-active-section-highlighting",
+      "title": "Upgrade the top navigation to feel closer to the template: add a distinct right-aligned primary action button for “Contact Me” on desktop (in addition to the existing nav links) and refine navbar spacing/typography so it looks more premium while retaining current smooth-scroll behavior and active-section highlighting.",
+      "reqIds": [
+        "REQ-19"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-hero-trust-skills-strip-row-below-the-main-hero-content-inspired-by-the-template-logo-strip-feel-implemented-using-text-only-chips-pills-no-third-party-logos-that-summarize-key-tools-areas-already-present-in-the-portfolio-e-g-sql-python-power-bi-tableau-forecasting",
+      "title": "Add a hero “trust/skills strip” row below the main hero content inspired by the template (logo-strip feel), implemented using text-only chips/pills (no third-party logos) that summarize key tools/areas already present in the portfolio (e.g., SQL, Python, Power BI, Tableau, Forecasting).",
+      "reqIds": [
+        "REQ-20"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-richer-but-consistent-interaction-design-across-section-cards-skills-experience-projects-certifications-to-match-the-template-s-premium-feel-more-consistent-hover-elevation-subtle-border-gradient-accents-and-optional-micro-animations-respecting-prefers-reduced-motion",
+      "title": "Apply richer but consistent interaction design across section cards (Skills, Experience, Projects, Certifications) to match the template’s “premium” feel: more consistent hover elevation, subtle border/gradient accents, and optional micro-animations (respecting prefers-reduced-motion).",
+      "reqIds": [
+        "REQ-21"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-render-any-newly-generated-decorative-hero-imagery-as-static-frontend-assets-under-frontend-public-assets-generated-and-reference-them-directly-from-the-hero-section-styling-do-not-serve-images-through-the-backend",
+      "title": "Render any newly generated decorative hero imagery as static frontend assets under frontend/public/assets/generated and reference them directly from the Hero section styling (do not serve images through the backend).",
+      "reqIds": [
+        "REQ-22"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-existing-resume-pdf-static-asset-at-assets-resume-riya-tyagi-resume-pdf-with-the-newly-user-attached-resume-file-so-that-the-downloaded-opened-file-is-a-valid-readable-pdf",
+      "title": "Replace the existing resume PDF static asset at \"/assets/resume/riya-tyagi-resume.pdf\" with the newly user-attached resume file so that the downloaded/opened file is a valid, readable PDF.",
+      "reqIds": [
+        "REQ-23"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-hero-section-resume-download-interaction-to-be-robust-across-browsers-open-in-a-new-tab-and-allow-direct-download-while-continuing-to-use-the-exact-public-path-assets-resume-riya-tyagi-resume-pdf",
+      "title": "Update the Hero section resume download interaction to be robust across browsers (open in a new tab and allow direct download) while continuing to use the exact public path \"/assets/resume/riya-tyagi-resume.pdf\".",
+      "reqIds": [
+        "REQ-24"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-global-visual-theme-to-use-a-soft-off-white-light-beige-background-and-deep-navy-dark-blue-for-headings-and-primary-text-while-keeping-the-existing-page-layout-sections-and-spacing-unchanged",
+      "title": "Update the global visual theme to use a soft off-white / light beige background and deep navy/dark blue for headings and primary text while keeping the existing page layout, sections, and spacing unchanged.",
+      "reqIds": [
+        "REQ-25"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-single-vibrant-gradient-accent-style-using-option-2-blue-cyan-teal-and-apply-gradients-only-to-1-hero-background-shapes-2-cta-buttons-and-3-highlight-stat-cards-remove-avoid-gradient-usage-elsewhere",
+      "title": "Implement a single vibrant gradient accent style using Option 2 (Blue → Cyan → Teal) and apply gradients only to: (1) hero background shapes, (2) CTA buttons, and (3) highlight/stat cards; remove/avoid gradient usage elsewhere.",
+      "reqIds": [
+        "REQ-26"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-the-hero-section-content-to-include-name-riya-tyagi-title-data-analytics-data-science-professional-and-add-the-short-tagline-turning-data-into-actionable-insights-prominently-in-the-hero-text-block-while-preserving-the-existing-hero-layout-text-left-image-right-and-cta-button-labels-view-portfolio-download-resume-contact-me",
+      "title": "Update the Hero section content to include: Name \"Riya Tyagi\"; Title \"Data Analytics & Data Science Professional\"; and add the short tagline \"Turning data into actionable insights\" prominently in the hero text block, while preserving the existing hero layout (text left, image right) and CTA button labels (View Portfolio, Download Resume, Contact Me).",
+      "reqIds": [
+        "REQ-27"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-refresh-component-styling-across-the-homepage-to-feel-minimal-modern-and-recruiter-friendly-smooth-gradients-only-where-allowed-soft-shadows-and-rounded-cards-ensure-the-look-is-colorful-but-not-childish-and-remains-professional-elegant",
+      "title": "Refresh component styling across the homepage to feel minimal, modern, and recruiter-friendly: smooth gradients (only where allowed), soft shadows, and rounded cards; ensure the look is colorful but not childish and remains professional/elegant.",
+      "reqIds": [
+        "REQ-28"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-keep-existing-navigation-behavior-smooth-scrolling-and-section-structure-intact-while-updating-any-navbar-styling-needed-to-match-the-new-beige-navy-gradient-accent-theme",
+      "title": "Keep existing navigation behavior, smooth scrolling, and section structure intact while updating any navbar styling needed to match the new beige + navy + gradient-accent theme.",
+      "reqIds": [
+        "REQ-29"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Create Home/Hero section with intro text, professional profile photo, key highlights, animated metrics, and CTA buttons (View Portfolio, Download Resume, Contact Me) with subtle data-inspired visuals",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add About Me section with expanded summary, collaboration/large dataset experience, education (M.Sc. Data Science, B.Sc. Mathematics Hons.), and career transition paragraph",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Add Skills section with categorized cards/icons (Programming & Databases, Analytics & Modeling, Visualization & BI, Tools & Practices)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add Experience section with timeline layout and detailed roles/impact bullets for Sutherland (Jan 2023–Present) and Corizo internship (Jul–Aug 2022)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Add Projects section with project cards, hover effects, and tech stack tags for listed projects (FMCG Sales & Marketing Analytics; Customer & Product Analytics)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Add Certifications section listing 'Data Science with Generative AI – PW Skills (2025)'",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Add Contact section with email/phone/LinkedIn/GitHub plus a simple contact form (Name, Email, Message)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Implement design system: modern minimal style, dark blue/charcoal primary with teal/cyan accents, light background, clean sans-serif typography, subtle animations, data-inspired icons, responsive layouts",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Non-functional requirements: SEO-friendly structure, fast loading/optimized images, and downloadable resume button",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-18",
+      "summary": "Implement backend support for the contact form in the single Motoko actor: store submitted messages (name, email, message, timestamp) in stable data, and expose a public method for submission. Keep the interface minimal and only what the frontend needs for submission.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-19",
+      "summary": "Replace the currently used profile picture/headshot on the site with the user-provided picture",
+      "reqIds": [],
+      "status": "blocked"
+    },
+    {
+      "id": "AR-20",
+      "summary": "Enhance the portfolio design/UX to be less simple by following the attached template as a reference for layout, visual richness, and overall presentation (while keeping content and professionalism)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-21",
+      "summary": "Fix Resume download: replace the corrupted/incorrect resume PDF asset so the downloaded file opens correctly",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-22",
+      "summary": "Redesign homepage visual theme to modern, colorful style while keeping existing layout/structure; use off-white/light beige background, deep navy text, and limited gradient accents (hero shapes, CTA buttons, highlight/stat cards) with rounded cards, soft shadows; update hero content (name/title/tagline/CTAs)",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "Riya Tyagi Portfolio Website",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

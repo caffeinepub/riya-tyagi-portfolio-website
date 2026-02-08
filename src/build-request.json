@@ -1,0 +1,122 @@
+{
+  "kind": "build_request",
+  "title": "Modern colorful theme refresh for portfolio homepage (beige + navy + gradient accents)",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-25",
+      "text": "Update the global visual theme to use a soft off-white / light beige background and deep navy/dark blue for headings and primary text while keeping the existing page layout, sections, and spacing unchanged.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Redesign my portfolio homepage using the same layout and structure as the current design, but update the visual theme to a modern, colorful style.\n\nDesign requirements:\n- Keep the layout, sections, and spacing similar to the reference (hero section with text on left and profile image on right).\n- Use a soft off-white / light beige background.\n- Use deep navy or dark blue for headings and primary text."
+        ]
+      },
+      "acceptanceCriteria": [
+        "The site background renders as a light beige/off-white tone (not pure white).",
+        "Primary text and headings render in a deep navy/dark blue tone with readable contrast on the beige background.",
+        "No changes to section order, spacing scale, or overall layout structure (including hero text-left / photo-right)."
+      ]
+    },
+    {
+      "id": "REQ-26",
+      "text": "Implement a single vibrant gradient accent style using Option 2 (Blue → Cyan → Teal) and apply gradients only to: (1) hero background shapes, (2) CTA buttons, and (3) highlight/stat cards; remove/avoid gradient usage elsewhere.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Apply a vibrant, modern gradient accent (choose one style):\n  - Option 1: Purple → Pink → Orange (Prism / Spectrum feel)\n  - Option 2: Blue → Cyan → Teal (clean, tech look)\n- Use gradients only for:\n  - Hero background shapes\n  - Call-to-action buttons\n  - Highlight cards or stats"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A consistent Blue→Cyan→Teal gradient style is used across the homepage wherever gradients appear.",
+        "Gradients are visible on hero background shapes and do not appear as general page/section backgrounds outside the hero decorative elements.",
+        "CTA buttons use the gradient accent (at least the primary CTA), with hover/focus states that remain professional and accessible.",
+        "Highlight/stat presentation elements (e.g., the hero floating stat card and/or metric emphasis) use the gradient accent; regular content cards elsewhere do not gain gradient fills by default."
+      ]
+    },
+    {
+      "id": "REQ-27",
+      "text": "Update the Hero section content to include: Name \"Riya Tyagi\"; Title \"Data Analytics & Data Science Professional\"; and add the short tagline \"Turning data into actionable insights\" prominently in the hero text block, while preserving the existing hero layout (text left, image right) and CTA button labels (View Portfolio, Download Resume, Contact Me).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Content updates:\n- Replace name with: Riya Tyagi\n- Title: Data Analytics & Data Science Professional\n- Short tagline: Turning data into actionable insights\n- CTA buttons: View Portfolio, Download Resume, Contact Me"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Hero displays the exact name \"Riya Tyagi\" and the exact title \"Data Analytics & Data Science Professional\".",
+        "Hero displays the exact tagline \"Turning data into actionable insights\" as a distinct line of text (not only implied in other sections).",
+        "CTA button texts remain exactly: \"View Portfolio\", \"Download Resume\", \"Contact Me\"."
+      ]
+    },
+    {
+      "id": "REQ-28",
+      "text": "Refresh component styling across the homepage to feel minimal, modern, and recruiter-friendly: smooth gradients (only where allowed), soft shadows, and rounded cards; ensure the look is colorful but not childish and remains professional/elegant.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Style preference:\n- Colorful but not childish\n- Minimal, modern UI\n- Smooth gradients, soft shadows, rounded cards\n- Suitable for a Data Analyst / Data Scientist portfolio"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Cards and interactive elements use rounded corners and soft, consistent shadows (no harsh/neon effects).",
+        "Hover/focus states feel polished and consistent with the new theme (including buttons and prominent cards).",
+        "Overall aesthetic reads as professional and recruiter-friendly (no overly saturated backgrounds, excessive gradients, or playful styling)."
+      ]
+    },
+    {
+      "id": "REQ-29",
+      "text": "Keep existing navigation behavior, smooth scrolling, and section structure intact while updating any navbar styling needed to match the new beige + navy + gradient-accent theme.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "Keep the layout, sections, and spacing similar to the reference"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Navbar still highlights the active section and maintains smooth scrolling to sections.",
+        "Navbar remains readable against the new background and matches the updated theme without breaking responsiveness (desktop and mobile)."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not change the existing site layout/structure, section order, or spacing patterns; keep the hero composition with text on the left and profile image on the right.",
+    "Use gradients only for hero background shapes, CTA buttons, and highlight/stat cards; do not introduce gradients as general section/page backgrounds.",
+    "Keep all user-facing text in English.",
+    "Do not edit files under frontend/src/components/ui (compose/override via props/classes instead)."
+  ],
+  "nonGoals": [
+    "Adding new sections or changing portfolio content beyond the specified hero content updates and visual theme refresh.",
+    "Backend or contact-form behavior changes.",
+    "Introducing third-party branding/logo strips or additional external integrations."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

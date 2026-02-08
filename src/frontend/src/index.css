@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 0.75rem;
+        
+        /* Light mode - Beige background with Navy text and Blue→Cyan→Teal accents */
+        --background: 0.97 0.01 60;  /* Soft beige/off-white */
+        --foreground: 0.25 0.04 250;  /* Deep navy */
+        
+        --card: 0.99 0.005 60;  /* Slightly lighter beige for cards */
+        --card-foreground: 0.25 0.04 250;
+        
+        --popover: 0.99 0.005 60;
+        --popover-foreground: 0.25 0.04 250;
+        
+        --primary: 0.30 0.06 250;  /* Deep navy for primary */
+        --primary-foreground: 0.98 0 0;
+        
+        --secondary: 0.94 0.01 60;  /* Light beige */
+        --secondary-foreground: 0.25 0.04 250;
+        
+        --muted: 0.92 0.015 60;
+        --muted-foreground: 0.50 0.03 250;
+        
+        --accent: 0.65 0.15 200;  /* Cyan (middle of blue→cyan→teal) */
+        --accent-foreground: 0.98 0 0;
+        
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.98 0 0;
+        
+        --border: 0.88 0.015 60;
+        --input: 0.88 0.015 60;
+        --ring: 0.65 0.15 200;
+        
+        --chart-1: 0.65 0.15 200;
+        --chart-2: 0.30 0.06 250;
+        --chart-3: 0.60 0.14 210;
+        --chart-4: 0.55 0.12 220;
+        --chart-5: 0.70 0.16 190;
+        
+        /* Gradient accent colors for Blue→Cyan→Teal */
+        --gradient-start: 0.55 0.18 240;  /* Blue */
+        --gradient-mid: 0.65 0.15 200;    /* Cyan */
+        --gradient-end: 0.70 0.14 180;    /* Teal */
+    }
+
+    .dark {
+        /* Dark mode - Dark navy background with light text and Blue→Cyan→Teal accents */
+        --background: 0.18 0.03 250;
+        --foreground: 0.95 0.01 60;
+        
+        --card: 0.22 0.03 250;
+        --card-foreground: 0.95 0.01 60;
+        
+        --popover: 0.20 0.03 250;
+        --popover-foreground: 0.95 0.01 60;
+        
+        --primary: 0.65 0.15 200;
+        --primary-foreground: 0.18 0.03 250;
+        
+        --secondary: 0.26 0.03 250;
+        --secondary-foreground: 0.95 0.01 60;
+        
+        --muted: 0.28 0.03 250;
+        --muted-foreground: 0.65 0.02 250;
+        
+        --accent: 0.65 0.15 200;
+        --accent-foreground: 0.18 0.03 250;
+        
+        --destructive: 0.60 0.20 27;
+        --destructive-foreground: 0.95 0.01 60;
+        
+        --border: 0.30 0.03 250;
+        --input: 0.30 0.03 250;
+        --ring: 0.65 0.15 200;
+        
+        --chart-1: 0.65 0.15 200;
+        --chart-2: 0.60 0.14 210;
+        --chart-3: 0.55 0.12 220;
+        --chart-4: 0.70 0.16 190;
+        --chart-5: 0.75 0.18 180;
+        
+        /* Gradient accent colors for Blue→Cyan→Teal */
+        --gradient-start: 0.55 0.18 240;
+        --gradient-mid: 0.65 0.15 200;
+        --gradient-end: 0.70 0.14 180;
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-feature-settings: "rlig" 1, "calt" 1;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        @apply font-bold;
+    }
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+    
+    /* Premium card interaction utilities with soft shadows */
+    .premium-card {
+        @apply transition-all duration-300;
+    }
+    
+    .premium-card:hover {
+        @apply shadow-lg -translate-y-1;
+    }
+    
+    .premium-card-border {
+        @apply relative overflow-hidden;
+    }
+    
+    .premium-card-border::before {
+        content: '';
+        @apply absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300;
+        background: linear-gradient(135deg, oklch(var(--accent) / 0.15), oklch(var(--primary) / 0.1));
+        z-index: -1;
+    }
+    
+    .premium-card-border:hover::before {
+        @apply opacity-100;
+    }
+    
+    /* Gradient accent utility for Blue→Cyan→Teal */
+    .gradient-accent {
+        background: linear-gradient(135deg, 
+            oklch(var(--gradient-start)), 
+            oklch(var(--gradient-mid)), 
+            oklch(var(--gradient-end))
+        );
+    }
+    
+    .gradient-accent-subtle {
+        background: linear-gradient(135deg, 
+            oklch(var(--gradient-start) / 0.1), 
+            oklch(var(--gradient-mid) / 0.1), 
+            oklch(var(--gradient-end) / 0.1)
+        );
+    }
+    
+    /* Hero gradient shapes */
+    .hero-gradient-shape {
+        background: linear-gradient(135deg, 
+            oklch(var(--gradient-start) / 0.15), 
+            oklch(var(--gradient-mid) / 0.12), 
+            oklch(var(--gradient-end) / 0.1)
+        );
+    }
+    
+    /* Section decorative backgrounds - removed gradients */
+    .section-gradient-subtle {
+        @apply relative;
+    }
+    
+    /* Layered section separator - solid color */
+    .section-separator {
+        @apply relative;
+    }
+    
+    .section-separator::after {
+        content: '';
+        @apply absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-1 bg-primary/30;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus visible styles for accessibility */
+*:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .premium-card:hover {
+        @apply translate-y-0;
+    }
+}

@@ -1,0 +1,16 @@
+{
+  "frontend/src/hooks/useCountUpOnView.ts": "Custom React hook that animates a number count-up effect when an element enters the viewport using IntersectionObserver. Returns a ref to attach to the target element and the current animated count value.",
+  "frontend/src/sections/HeroSection.tsx": "Premium hero section with Blue→Cyan→Teal gradient decorative shapes, updated content showing \"Riya Tyagi\" as Data Analytics & Data Science Professional with tagline \"Turning data into actionable insights\", gradient CTA buttons, and gradient-accented floating stat card.",
+  "frontend/src/index.css": "Global styles with OKLCH color system featuring light beige background, deep navy text, and Blue→Cyan→Teal gradient accents; includes gradient utilities for hero shapes, CTA buttons, and highlight cards with soft shadows and modern styling.",
+  "frontend/src/App.tsx": "Main application component with gradient-accented background elements rendering all portfolio sections with navbar, footer, and toast notifications.",
+  "frontend/src/components/PortfolioNavbar.tsx": "Fixed navigation bar with smooth-scroll links, active section highlighting, and gradient-accented primary \"Contact Me\" CTA button; includes responsive mobile menu with modern beige+navy theme.",
+  "frontend/src/components/SectionLayout.tsx": "Reusable section wrapper component with enhanced spacing and solid-color separator (no gradients outside hero).",
+  "frontend/src/sections/SkillsSection.tsx": "Skills section displaying four skill categories in cards with soft shadows, rounded corners, and modern hover interactions matching the refreshed theme.",
+  "frontend/src/sections/ExperienceSection.tsx": "Professional experience timeline section with solid-color timeline line and soft-shadow card styling matching the modern beige+navy theme.",
+  "frontend/src/sections/ProjectsSection.tsx": "Featured projects section with soft-shadow cards, rounded corners, and modern professional styling without gradient fills on content cards.",
+  "frontend/src/sections/CertificationsSection.tsx": "Certifications section displaying certification card with soft shadows and modern styling matching the updated theme.",
+  "frontend/tailwind.config.js": "Tailwind configuration mapping OKLCH color tokens with extended soft shadow utilities and modern border radius settings for a professional, colorful design system.",
+  "frontend/src/sections/AboutSection.tsx": "About section with three information cards featuring soft shadows and modern styling consistent with the beige+navy+gradient accent theme.",
+  "frontend/src/sections/ContactSection.tsx": "Contact section with gradient-accented submit button, soft-shadow cards, and modern professional styling for contact information and form.",
+  "frontend/src/components/Footer.tsx": "Footer component with beige+navy theme styling and caffeine.ai attribution link."
+}
