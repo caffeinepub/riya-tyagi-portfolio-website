@@ -112,7 +112,7 @@ export function HeroSection() {
               <p className="text-2xl md:text-3xl text-foreground/90 font-semibold">
                 Data Analytics & Data Science Professional
               </p>
-              <p className="text-xl md:text-2xl font-medium bg-gradient-accent bg-clip-text text-transparent">
+              <p className="text-xl md:text-2xl font-medium gradient-accent bg-clip-text text-transparent">
                 Turning data into actionable insights
               </p>
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-xl">
@@ -195,7 +195,7 @@ export function HeroSection() {
                       <TrendingUp className="h-5 w-5 text-white" />
                     </div>
                     <div>
-                      <div className="text-2xl font-bold bg-gradient-accent bg-clip-text text-transparent">95%</div>
+                      <div className="text-2xl font-bold gradient-accent bg-clip-text text-transparent">95%</div>
                       <div className="text-xs text-muted-foreground font-medium">Forecast Accuracy</div>
                     </div>
                   </div>
@@ -229,7 +229,7 @@ function MetricCard({ value, suffix, label }: { value: number; suffix: string; l
 
   return (
     <div ref={ref} className="text-center">
-      <div className="text-3xl md:text-4xl font-bold bg-gradient-accent bg-clip-text text-transparent">
+      <div className="text-3xl md:text-4xl font-bold gradient-accent bg-clip-text text-transparent">
         {Math.round(count)}
         {suffix}
       </div>

@@ -236,7 +236,7 @@ export function onAdminTokenChange(listener: AdminTokenChangeListener): () => vo
 
 /**
  * Emit an admin token change event to all registered listeners
- * Call this after updating the admin token in sessionStorage
+ * Call this after storing a new admin token to trigger re-provisioning
  */
 export function emitAdminTokenChange(): void {
     adminTokenChangeListeners.forEach(listener => {

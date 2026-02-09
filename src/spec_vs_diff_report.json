@@ -1,37 +1,44 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-08T21:13:38.702Z",
-  "summary": "REQ-63 (replacing the static resume PDF at the exact public path) is not implemented in the provided diff. The only modified files are a URL parameter utility and project_state metadata, neither of which replace or update the resume PDF asset.",
-  "missing_requirements": [
-    {
-      "id": "REQ-63",
-      "requirement": "Replace the existing static resume PDF at the exact public path \"/assets/resume/riya-tyagi-resume.pdf\" (file: \"frontend/public/assets/resume/riya-tyagi-resume.pdf\") with the newly user-attached valid PDF so it opens/downloads without 'invalid PDF' errors.",
-      "reason": "The diff shows no changes to \"frontend/public/assets/resume/riya-tyagi-resume.pdf\" and no other asset/public-file updates; only TypeScript utility and project state JSON were modified.",
-      "evidence": [
-        "frontend/src/utils/urlParams.ts",
-        "project_state.json"
-      ]
-    }
-  ],
+  "generatedAt": "2026-02-09T06:19:14.874Z",
+  "summary": "REQ-1 and REQ-2 appear to be implemented by correcting/aliasing the gradient background utility so `bg-clip-text text-transparent` no longer results in invisible Hero metric/tagline/stat text. However, the diff also includes unrelated changes (not requested) to URL parameter utilities, project state metadata, and documentation summaries.",
+  "missing_requirements": [],
   "hallucinated_features": [
     {
-      "description": "Added/modified URL parameter and sessionStorage utilities (e.g., persisted URL parameters, hash query parsing, clearing params from hash).",
-      "reason": "Not requested by BuildRequest, which is solely about replacing a corrupted resume PDF at a specific public path without changing the public URL or download logic.",
+      "description": "Added/expanded URL parameter + sessionStorage utilities (including persisted parameters and hash query parsing/cleanup helpers), which are unrelated to the HeroSection invisible metric/gradient-text fix.",
+      "reason": "BuildRequest scope is limited to fixing invisible HeroSection gradient-text (metrics/tagline/95% card) and explicitly says not to address other areas; URL param persistence/cleanup is not requested.",
       "evidence": [
         "frontend/src/utils/urlParams.ts"
       ]
     },
     {
-      "description": "Updated project_state.json summary/state unrelated to resume PDF replacement.",
-      "reason": "Not requested; BuildRequest does not mention updating project metadata/state.",
+      "description": "Updated resume download implementation (creating a temporary anchor element for cross-browser download robustness).",
+      "reason": "BuildRequest non-goals explicitly say not to address resume download in this build; changes to resume download behavior are out of scope.",
+      "evidence": [
+        "frontend/src/sections/HeroSection.tsx"
+      ]
+    },
+    {
+      "description": "Updated project tracking metadata to include new_feature_requests AR-1/AR-2 marked pending.",
+      "reason": "BuildRequest did not request changes to project_state.json; this is process/metadata rather than the UI fix.",
       "evidence": [
         "project_state.json"
       ]
+    },
+    {
+      "description": "Updated/added internal documentation summaries claiming broad UI/theme/auth changes beyond the requested Hero gradient-text visibility fix.",
+      "reason": "Not requested; also introduces claims (e.g., Messages auth gating, many section style refreshes) that are outside this diff’s modified file list and outside the BuildRequest scope.",
+      "evidence": [
+        "frontend-file-summaries.txt"
+      ]
     }
   ],
-  "confidence": 0.78,
+  "confidence": 0.72,
   "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/index.css",
+    "frontend/src/sections/HeroSection.tsx",
     "frontend/src/utils/urlParams.ts",
     "project_state.json"
   ]

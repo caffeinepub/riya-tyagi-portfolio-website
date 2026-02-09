@@ -141,6 +141,15 @@
         );
     }
     
+    /* Alias for bg-gradient-accent to prevent invisible text issues */
+    .bg-gradient-accent {
+        background: linear-gradient(135deg, 
+            oklch(var(--gradient-start)), 
+            oklch(var(--gradient-mid)), 
+            oklch(var(--gradient-end))
+        );
+    }
+    
     .gradient-accent-subtle {
         background: linear-gradient(135deg, 
             oklch(var(--gradient-start) / 0.1), 

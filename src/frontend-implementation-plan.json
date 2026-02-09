@@ -1,21 +1,42 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Replace corrupted resume PDF with the newly attached valid PDF at the same public URL",
+  "title": "Fix HeroSection gradient text visibility for metrics and hero accents",
   "requirements": [
     {
-      "id": "REQ-63",
-      "summary": "Replace the existing public resume PDF file with the newly attached PDF while keeping the exact same URL used by the Hero section.",
+      "id": "REQ-1",
+      "summary": "Correct Hero metrics numeric value styling so gradient-text values render visibly (no transparent text without a working gradient) across themes and breakpoints.",
       "acceptanceCriteria": [
-        "The file at \"frontend/public/assets/resume/riya-tyagi-resume.pdf\" is replaced with the newly attached PDF (byte-for-byte updated in the build output).",
-        "Clicking the \"Download Resume\" button in the Hero section downloads/opens \"/assets/resume/riya-tyagi-resume.pdf\" without any 'invalid PDF' error in common browser PDF viewers.",
-        "Opening the downloaded PDF in a desktop PDF reader (e.g., Adobe Reader/Preview) succeeds without corruption warnings."
+        "In the Hero metrics grid, all four metric numeric values are visible in light mode and dark mode.",
+        "Values remain visible across mobile, tablet, and desktop breakpoints.",
+        "No metric value text uses `text-transparent` unless it also has a working gradient background applied (or an equivalent visible text color fallback)."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/resume/riya-tyagi-resume.pdf",
+          "path": "frontend/src/sections/HeroSection.tsx",
           "operation": "modify",
-          "description": "Overwrite/replace this static asset with the newly user-attached PDF (use the provided attachment file as the source) while keeping the exact filename and location so the public URL remains \"/assets/resume/riya-tyagi-resume.pdf\"."
+          "description": "Update the metric value element to use the existing `.gradient-accent` utility (instead of the invalid `bg-gradient-accent`) alongside `bg-clip-text text-transparent`, ensuring numeric values render visibly in all themes and breakpoints."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Ensure other HeroSection gradient-text elements (tagline and floating 95% card) render visibly by using the existing `gradient-accent` utility or providing a compatible CSS alias for `bg-gradient-accent`.",
+      "acceptanceCriteria": [
+        "The Hero tagline text (“Turning data into actionable insights”) is visible.",
+        "The floating overlay stat value (95%) is visible.",
+        "No new console errors or Tailwind class resolution issues are introduced."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/sections/HeroSection.tsx",
+          "operation": "modify",
+          "description": "Replace `bg-gradient-accent` with the existing `gradient-accent` utility everywhere it is paired with `bg-clip-text text-transparent` (tagline and floating overlay 95% value) so these gradient-text elements render visibly."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add a production-safe CSS utility alias for `.bg-gradient-accent` that applies the same gradient background as `.gradient-accent`, preventing any remaining uses of `bg-gradient-accent` from producing invisible text when combined with `bg-clip-text text-transparent`."
         }
       ]
     }

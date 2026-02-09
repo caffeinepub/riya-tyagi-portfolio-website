@@ -1,10 +1,11 @@
 # Specification
 
 ## Summary
-**Goal:** Fix the “invalid PDF” issue by replacing the existing resume PDF with the newly user-attached PDF while keeping the same public URL.
+**Goal:** Make the HeroSection numeric metric values and other gradient-text elements render visibly across themes and breakpoints.
 
 **Planned changes:**
-- Replace `frontend/public/assets/resume/riya-tyagi-resume.pdf` with the newly attached resume PDF (byte-for-byte update).
-- Verify the Hero section “Download Resume” action still points to `/assets/resume/riya-tyagi-resume.pdf` and the file opens/downloads as a valid PDF.
+- Fix the Hero metrics grid numeric value styling so it no longer becomes transparent due to invalid/mismatched gradient utility usage.
+- Ensure any other HeroSection elements using `bg-clip-text text-transparent` (e.g., the tagline and floating “95%” overlay) have a valid gradient background class (`gradient-accent`) or an equivalent CSS alias so text remains visible.
+- Verify visibility in light/dark mode and across mobile/tablet/desktop without introducing Tailwind class resolution issues or console errors.
 
-**User-visible outcome:** Clicking “Download Resume” downloads/opens the resume PDF successfully in common browser viewers and desktop PDF readers without corruption or “invalid PDF” errors.
+**User-visible outcome:** The Hero stats section displays all four metric numbers clearly, and the Hero tagline plus the floating “95%” value are readable in both light and dark mode on all screen sizes.

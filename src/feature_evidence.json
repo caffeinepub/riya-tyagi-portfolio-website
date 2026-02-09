@@ -2,9 +2,11 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-replace-the-existing-static-resume-pdf-at-the-exact-public-path-assets-resume-riya-tyagi-resume-pdf-file-frontend-public-assets-resume-riya-tyagi-resume-pdf-with-the-newly-user-attached-pdf-so-the-downloaded-opened-resume-is-a-valid-readable-pdf-not-corrupted",
-      "featureTitle": "Replace the existing static resume PDF at the exact public path \"/assets/resume/riya-tyagi-resume.pdf\" (file: \"frontend/public/assets/resume/riya-tyagi-resume.pdf\") with the newly user-attached PDF so the downloaded/opened resume is a valid, readable PDF (not corrupted).",
-      "files": [],
+      "featureId": "feature-fix-the-herosection-metric-value-text-so-numeric-values-render-visibly-years-experience-forecast-accuracy-tools-mastered-projects-completed-by-correcting-the-gradient-text-class-usage-that-currently-makes-the-text-transparent-without-a-valid-background-gradient",
+      "featureTitle": "Fix the HeroSection metric/value text so numeric values render visibly (Years Experience, Forecast Accuracy, Tools Mastered, Projects Completed) by correcting the gradient text class usage that currently makes the text transparent without a valid background gradient.",
+      "files": [
+        "frontend/src/sections/HeroSection.tsx"
+      ],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
@@ -14,7 +16,27 @@
         "authorization@4.0.0"
       ],
       "testIds": [
-        "REQ-63"
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-any-other-herosection-gradient-text-elements-using-the-same-invalid-class-e-g-tagline-and-the-floating-95-card-render-visibly-by-either-a-replacing-bg-gradient-accent-with-the-existing-gradient-accent-utility-where-used-with-bg-clip-text-text-transparent-or-b-adding-a-css-utility-alias-so-bg-gradient-accent-produces-the-intended-gradient-background",
+      "featureTitle": "Ensure any other HeroSection gradient-text elements using the same invalid class (e.g., tagline and the floating 95% card) render visibly by either (a) replacing `bg-gradient-accent` with the existing `gradient-accent` utility where used with `bg-clip-text text-transparent`, or (b) adding a CSS utility alias so `bg-gradient-accent` produces the intended gradient background.",
+      "files": [
+        "frontend/src/index.css",
+        "frontend/src/sections/HeroSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0",
+        "authorization@4.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
       ],
       "confidence": "high"
     }

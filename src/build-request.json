@@ -1,34 +1,52 @@
 {
   "kind": "build_request",
-  "title": "Replace resume PDF with user-attached file to fix 'invalid PDF'",
+  "title": "Fix invisible metric values in Hero stats section",
   "priority": "high",
   "requirements": [
     {
-      "id": "REQ-63",
-      "text": "Replace the existing static resume PDF at the exact public path \"/assets/resume/riya-tyagi-resume.pdf\" (file: \"frontend/public/assets/resume/riya-tyagi-resume.pdf\") with the newly user-attached PDF so the downloaded/opened resume is a valid, readable PDF (not corrupted).",
+      "id": "REQ-1",
+      "text": "Fix the HeroSection metric/value text so numeric values render visibly (Years Experience, Forecast Accuracy, Tools Mastered, Projects Completed) by correcting the gradient text class usage that currently makes the text transparent without a valid background gradient.",
       "target": "frontend",
       "source": {
         "messageIds": [
-          "msg-user-1"
+          "msg-1"
         ],
         "quotes": [
-          "Please find attached pdf"
+          "I am not able to see anything in this attached section first fix this."
         ]
       },
       "acceptanceCriteria": [
-        "The file at \"frontend/public/assets/resume/riya-tyagi-resume.pdf\" is replaced with the newly attached PDF (byte-for-byte updated in the build output).",
-        "Clicking the \"Download Resume\" button in the Hero section downloads/opens \"/assets/resume/riya-tyagi-resume.pdf\" without any 'invalid PDF' error in common browser PDF viewers.",
-        "Opening the downloaded PDF in a desktop PDF reader (e.g., Adobe Reader/Preview) succeeds without corruption warnings."
+        "In the Hero metrics grid, all four metric numeric values are visible in light mode and dark mode.",
+        "Values remain visible across mobile, tablet, and desktop breakpoints.",
+        "No metric value text uses `text-transparent` unless it also has a working gradient background applied (or an equivalent visible text color fallback)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Ensure any other HeroSection gradient-text elements using the same invalid class (e.g., tagline and the floating 95% card) render visibly by either (a) replacing `bg-gradient-accent` with the existing `gradient-accent` utility where used with `bg-clip-text text-transparent`, or (b) adding a CSS utility alias so `bg-gradient-accent` produces the intended gradient background.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "I am not able to see anything in this attached section first fix this."
+        ]
+      },
+      "acceptanceCriteria": [
+        "The Hero tagline text (“Turning data into actionable insights”) is visible.",
+        "The floating overlay stat value (95%) is visible.",
+        "No new console errors or Tailwind class resolution issues are introduced."
       ]
     }
   ],
   "constraints": [
-    "Do not change the public resume URL; it must remain exactly \"/assets/resume/riya-tyagi-resume.pdf\" as referenced by the Hero section download logic.",
-    "Keep all user-facing text in English."
+    "Do not modify any files under frontend/immutablePaths (including frontend/src/main.tsx and the Internet Identity/actor hooks).",
+    "Keep the fix production-safe and compatible with Tailwind + existing global CSS utilities."
   ],
   "nonGoals": [
-    "No changes to Hero section layout, CTA labels, or resume download code unless strictly required to make the attached PDF open correctly.",
-    "No backend changes."
+    "Do not change the metric numbers/labels or add new portfolio sections.",
+    "Do not address resume download or /messages authorization in this build request (focus only on the invisible attached/stats section as requested)."
   ],
   "imageRequirements": {
     "required": [],
@@ -37,7 +55,9 @@
   "userProfileUpdate": {
     "goalsToAdd": [],
     "goalsToRemove": [],
-    "preferencesToAdd": [],
+    "preferencesToAdd": [
+      "Use English for any user-facing text."
+    ],
     "preferencesToRemove": [],
     "miscToAdd": [],
     "miscToRemove": [],
